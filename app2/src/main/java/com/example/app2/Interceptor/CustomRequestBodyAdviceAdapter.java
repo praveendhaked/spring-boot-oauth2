@@ -1,10 +1,10 @@
-package com.example.sso.Interceptor;
+package com.example.app2.Interceptor;
 
 import java.lang.reflect.Type;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.example.sso.Service.LoggingService;
+import com.example.app2.Service.LoggingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpInputMessage;

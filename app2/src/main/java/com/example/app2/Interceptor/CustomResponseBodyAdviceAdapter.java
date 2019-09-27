@@ -1,5 +1,5 @@
-package com.example.sso.Interceptor;
-import com.example.sso.Service.LoggingService;
+package com.example.app2.Interceptor;
+import com.example.app2.Service.LoggingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;

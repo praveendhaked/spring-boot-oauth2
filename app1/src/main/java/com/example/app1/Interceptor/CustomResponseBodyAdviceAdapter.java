@@ -1,6 +1,6 @@
-package com.example.app2.Interceptor;
+package com.example.app1.Interceptor;
 
-import com.example.app2.Service.LoggingService;
+import com.example.app1.Service.LoggingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;

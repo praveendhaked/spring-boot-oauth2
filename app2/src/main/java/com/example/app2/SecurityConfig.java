@@ -15,6 +15,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests().antMatchers("/role2/**").access("hasRole('ROLE2')")
                 .and()
+                .authorizeRequests().antMatchers("/role1/**").access("hasRole('ROLE1')")
+                .and()
                 .authorizeRequests().anyRequest().authenticated();
     }
 }

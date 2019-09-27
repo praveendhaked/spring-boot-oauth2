@@ -1,4 +1,4 @@
-package com.example.app2.Service;
+package com.example.app1.Service;
 
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Component;

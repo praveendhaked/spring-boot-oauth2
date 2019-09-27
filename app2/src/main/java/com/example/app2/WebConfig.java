@@ -1,6 +1,6 @@
-package com.example.sso;
+package com.example.app2;
 
-import com.example.sso.Interceptor.LogInterceptor;
+import com.example.app2.Interceptor.LogInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
