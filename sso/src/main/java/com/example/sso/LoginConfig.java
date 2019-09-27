@@ -29,13 +29,19 @@ public class LoginConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("user")
-                .password(passwordEncoder().encode("password"))
-                .roles("USER")
-                .and()
                 .withUser("user1")
-                .password(passwordEncoder().encode("password1"))
-                .roles("USER");
+                .password(passwordEncoder().encode("pwd1"))
+                .roles("ROLE1")
+                .and()
+                .withUser("user2")
+                .password(passwordEncoder().encode("pwd2"))
+                .roles("ROLE2");
+    }
+
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception{
+        return super.authenticationManagerBean();
     }
 
     @Bean
