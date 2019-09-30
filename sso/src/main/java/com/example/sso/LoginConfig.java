@@ -38,7 +38,6 @@ public class LoginConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("user1")
                 .password(passwordEncoder().encode("pwd1"))
-<<<<<<< HEAD
                 .roles("ROLE1")
                 .and()
                 .withUser("user2")
@@ -50,18 +49,9 @@ public class LoginConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception{
         return super.authenticationManagerBean();
-=======
-                .roles("ROLE1");
->>>>>>> password_grant
     }
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
-    }
-
-    @Override
-    @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception{
-        return super.authenticationManagerBean();
     }
 }
