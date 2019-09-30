@@ -3,6 +3,7 @@ package com.example.sso;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,11 +32,6 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
         return redis;
     }
 
-//    @Override
-//    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-//        endpoints.authenticationManager(authenticationManager);
-//    }
-
     public OAuth2Config(PasswordEncoder passwordEncoder){
         this.passwordEncoder = passwordEncoder;
     }
@@ -43,23 +39,13 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient("foo")
-                .secret(passwordEncoder.encode("bar"))
-                .authorizedGrantTypes("refresh_token", "password")
-                .scopes("user_info")
-                .redirectUris("http://localhost:8082/app1/login", "http://localhost:8083/app2/login")
-                .autoApprove(true)
-                .accessTokenValiditySeconds(120)
-                .refreshTokenValiditySeconds(300)
+                .withClient("foo").secret(passwordEncoder.encode("bar"))
+                .authorizedGrantTypes("password", "refresh_token").scopes("user_info")
+                .accessTokenValiditySeconds(120).refreshTokenValiditySeconds(3000)
                 .and()
-                .withClient("foo1")
-                .secret(passwordEncoder.encode("bar1"))
-                .authorizedGrantTypes("refresh_token", "authorization_code", "client_credentials")
-                .scopes("user_info")
-                .redirectUris("http://localhost:8082/app1/login", "http://localhost:8083/app2/login")
-                .autoApprove(true)
-                .accessTokenValiditySeconds(120)
-                .refreshTokenValiditySeconds(300);
+                .withClient("foo1").secret(passwordEncoder.encode("bar1"))
+                .authorizedGrantTypes("password", "refresh_token").scopes("user_info")
+                .accessTokenValiditySeconds(120).refreshTokenValiditySeconds(3000);
     }
 
     @Override
@@ -72,7 +58,18 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints){
         endpoints
+                .reuseRefreshTokens(true)
                 .authenticationManager(authenticationManager)
-                .tokenStore(tokenStore());
+                .tokenStore(tokenStore()).approvalStoreDisabled();
     }
+//
+//    @Bean
+//    @Primary
+//    //Making this primary to avoid any accidental duplication with another token service instance of the same name
+//    public DefaultTokenServices tokenServices() {
+//        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+//        defaultTokenServices.setTokenStore(tokenStore());
+//        defaultTokenServices.setSupportRefreshToken(true);
+//        return defaultTokenServices;
+//    }
 }
