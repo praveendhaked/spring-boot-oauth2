@@ -10,17 +10,10 @@ public class SecurityConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests().antMatchers("/actuator/**").permitAll()
                 .and()
+                .authorizeRequests().antMatchers("/role1/**").access("hasRole('ROLE1')")
+                .and()
+                .authorizeRequests().antMatchers("/role2/**").access("hasRole('ROLE2')")
+                .and()
                 .authorizeRequests().anyRequest().authenticated();
     }
 }
-
-//@Configuration
-//@EnableOAuth2Sso
-//public class SecurityConfig extends WebSecurityConfigurerAdapter {
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception{
-//        http.requestMatchers()
-//                .and()
-//                .authorizeRequests().antMatchers("/role1/**").access("hasRole('ROLE1')")
-//                .and()
-//                .authorizeRequests().antMatchers("/role2/**").access("hasRole('ROLE2')")
