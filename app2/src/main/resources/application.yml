@@ -9,12 +9,16 @@ management:
         include: '*'
 security:
   oauth2:
-    client:
-      client-id: foo1
-      client-secret:  bar1
-      access-token-uri: http://localhost:8080/sso-server/oauth/token
-      user-authorization-uri: http://localhost:8080/sso-server/oauth/authorize
+#    client:
+#      client-id: foo1
+#      client-secret:  bar1
+#      access-token-uri: http://localhost:8080/sso-server/oauth/token
+#      user-authorization-uri: http://localhost:8080/sso-server/oauth/authorize
     resource:
       user-info-uri: http://localhost:8080/sso-server/user/me
+      jwt:
+        key-uri: http://localhost:8080/sso-server/oauth/token_key
+#      jwk:
+#        key-set-uri: http://localhost:8080/sso-server/.well-known/jwks.json
   basic:
     enabled: false
